@@ -410,7 +410,7 @@ const ManageRoles = ({ editable = true, initialPermissions }: RoleTableProps) =>
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-96">
             <h2 className="text-xl font-bold mb-4">Confirm Delete</h2>
-            <p>Are you sure you want to delete the role "{roleToDelete?.name}"?</p>
+            <p>Are you sure you want to delete the role <span className="font-bold">{roleToDelete?.name}?</span></p>
             <div className="flex justify-end space-x-2 mt-4">
               <Button
                 onClick={handleCancelDelete}

@@ -42,6 +42,7 @@ const UserManagement: React.FC = () => {
   const [roles, setRoles] = useState<Role[]>([]);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [userToDelete, setUserToDelete] = useState<User | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const getToken = () => localStorage.getItem("authToken");
 
@@ -69,7 +70,7 @@ const UserManagement: React.FC = () => {
       } else {
         console.error("Unexpected data format:", userResponse.data);
         toast.error("Unexpected response format from the server.");
-      }
+      } 
 
       // Fetching roles
       const roleResponse = await axios.get("/roles", {
@@ -79,7 +80,7 @@ const UserManagement: React.FC = () => {
     } catch (error: any) {
       console.error("Error fetching data:", error);
       toast.error("Failed to fetch users or roles.");
-    }
+    } 
   };
 
   useEffect(() => {
@@ -143,6 +144,7 @@ const UserManagement: React.FC = () => {
           setFormData(user);
           setIsModalOpen(true);
         };
+
         // Handle form field changes
         const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
           const { name, value } = e.target;
@@ -150,7 +152,7 @@ const UserManagement: React.FC = () => {
         };
      
       //edit user
-      const editUser = (userToEdit: User) => {
+      const editUser = async (userToEdit: User) => {
         if (!formData) {
           toast.error("Form data is missing!");
           return;
